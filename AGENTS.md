@@ -1,77 +1,79 @@
 # AGENTS.md
 
-Instrucciones generales para cualquier agente (humano o IA) que trabaje en este
-repositorio. Deben cargarse y respetarse automáticamente antes de realizar
-cualquier tarea.
+General instructions for any agent (human or AI) working in this
+repository. Must be loaded and respected automatically before doing any
+task.
 
-## 0.1 Idioma
+## 0.1 Language
 
-- Toda la conversación con el usuario (explicaciones, preguntas, resúmenes) va en
-  ESPAÑOL.
-- Todo el código va en INGLÉS: nombres de variables, funciones, clases, métodos,
-  rutas, nombres de tablas/columnas, mensajes de commit y comentarios en código.
-  Ningún identificador ni comentario en español, sin excepción (a diferencia de
-  otros proyectos donde el vocabulario de dominio se conserva en español, aquí
-  todo va en inglés salvo que el usuario indique lo contrario para un término sin
-  traducción razonable).
-- Si hay conflicto entre "código legible" y "todo en inglés", gana "todo en
-  inglés".
+- All conversation with the user (explanations, questions, summaries) goes
+  in the user's preferred language — set this explicitly for your project.
+- All code goes in ENGLISH: variable/function/class/method names, routes,
+  table/column names, commit messages, and code comments. No identifier or
+  comment in any other language, without exception (unlike projects where
+  domain vocabulary is kept in the source language — here everything is in
+  English unless the user says otherwise for a term with no reasonable
+  translation).
+- If "readable code" and "everything in English" conflict, "everything in
+  English" wins.
 
-## 0.2 Honestidad y transparencia (obligatorio)
+## 0.2 Honesty and transparency (mandatory)
 
-- No afirmar que algo "funciona" o está "completado" sin haberlo verificado
-  (correr el sitio, correr tests, revisar el resultado real). Si no se verificó,
-  decirlo explícitamente: "esto no lo he probado todavía".
-- No inventar módulos, APIs de Drupal, hooks, campos de configuración ni
-  comportamiento que no se haya confirmado en la documentación oficial o en el
-  código del proyecto. Si no se está seguro, decirlo y ofrecer verificarlo antes
-  de continuar.
-- No ocultar ambigüedades: si una instrucción admite más de una interpretación,
-  explicitar la ambigüedad, presentar opciones con pros/contras, recomendar una y
-  esperar confirmación antes de implementar.
-- No "tragarse" errores: si un comando falla, un módulo no se instala, un test no
-  pasa, reportarlo tal cual (no silenciarlo con un try/catch vacío ni seguir como
-  si nada). Esto aplica también al código: prohibido un `catch` que solo loguea y
-  continúa sin propagar o manejar el error de verdad.
-- Si algo hecho en una sesión anterior resulta estar roto o mal documentado,
-  decirlo y corregir el registro (memoria/plan) en vez de dejarlo inconsistente.
-- Cuando algo está totalmente funcionando es que funciona al 100%; si no está
-  funcionando al 100% hay que corregir el fallo.
+- Never claim something "works" or is "done" without having verified it
+  (running the site, running tests, checking the actual result). If it
+  wasn't verified, say so explicitly: "this hasn't been tested yet."
+- Never invent Drupal modules, APIs, hooks, config fields, or behavior that
+  hasn't been confirmed in the official documentation or the project's own
+  code. If unsure, say so and offer to verify before continuing.
+- Don't hide ambiguity: if an instruction admits more than one
+  interpretation, state the ambiguity explicitly, present options with
+  pros/cons, recommend one, and wait for confirmation before implementing.
+- Don't swallow errors: if a command fails, a module won't install, a test
+  doesn't pass, report it as-is (don't silence it with an empty try/catch or
+  carry on as if nothing happened). This applies to code too: a `catch` that
+  only logs and continues without really propagating or handling the error
+  is forbidden.
+- If something done in a previous session turns out to be broken or
+  mis-documented, say so and fix the record (memory/plan) instead of leaving
+  it inconsistent.
+- When something is fully working, it works 100%; if it's not working
+  100%, the failure needs to be fixed.
 
-## 0.3 Aprobación antes de implementar
+## 0.3 Approval before implementing
 
-- No se implementa código (módulos custom, tema, configuración exportada,
-  migraciones) sin aprobación explícita del usuario ("implementa", "hazlo",
-  "adelante" o equivalente).
-- Análisis, diseño, investigación de módulos/enfoques y documentación NO
-  requieren aprobación previa — eso sí se puede hacer libremente.
-- Señales de detención: "quiero que analices/documentes/investigues/expliques",
-  "no implementes todavía", "solo quiero entender", "ayúdame a planear".
+- Code is not implemented (custom modules, theme, exported configuration,
+  migrations) without the user's explicit approval ("implement it", "do
+  it", "go ahead", or equivalent).
+- Analysis, design, research on modules/approaches, and documentation do
+  NOT require prior approval — those can be done freely.
+- Stop signals: "I want you to analyze/document/research/explain", "don't
+  implement yet", "I just want to understand", "help me plan".
 
-## 0.4 Entorno de pruebas (URL pública + túnel)
+## 0.4 Test environment (public URL + tunnel)
 
-Sección específica de cada proyecto concreto que use este harness — en el
-proyecto original (Danemar Parceros) documenta la URL pública de pruebas y el
-comando (con token real de Cloudflare Tunnel) para levantar el túnel. Ese
-comando/token **no viaja en esta copia** por ser una credencial real; se
-reemplaza acá por un placeholder de referencia:
+Project-specific section — fill in for each concrete project that adopts
+this harness. In the original project this harness was extracted from, it
+documented the public staging URL and the command (with a real Cloudflare
+Tunnel token) to bring the tunnel up. That command/token does **not**
+travel in this template, since it would be a real credential; it's replaced
+here with a placeholder:
 
 ```
-cloudflared tunnel run --token <TOKEN_REAL_NO_INCLUIDO_EN_ESTE_REPO>
+cloudflared tunnel run --token <REAL_TOKEN_NOT_INCLUDED_IN_THIS_REPO>
 ```
 
-Al adoptar este harness en un proyecto nuevo, completar esta sección con los
-datos reales de ese proyecto (URL de pruebas, comando de túnel si aplica) —
-y, si el archivo llega a contener un secreto real otra vez, mantenerlo fuera
-de cualquier repo que se comparta o publique.
+When adopting this harness for a new project, fill in this section with
+that project's real data (staging URL, tunnel command if applicable) — and
+if this file ever contains a real secret again, keep it out of any repo
+that gets shared or published.
 
-## 0.5 Commits tras implementar un plan
+## 0.5 Commits after implementing a plan
 
-- Después de implementar el código de un plan (o de una parte funcional de un
-  plan), hacer commit al branch `develop` — no dejar cambios sin commitear de
-  una tarea ya completada y verificada.
-- Si `develop` no existe todavía, crearlo antes del primer commit de
-  implementación.
-- No commitear código a medio terminar ni que no se haya verificado
-  (ver 0.2): primero verificar que funciona, después commitear.
-- Mensajes de commit en inglés (ver 0.1).
+- After implementing the code for a plan (or a working part of a plan),
+  commit to the `develop` branch — never leave uncommitted changes from a
+  task that's already done and verified.
+- If `develop` doesn't exist yet, create it before the first implementation
+  commit.
+- Never commit half-finished or unverified code (see 0.2): verify it works
+  first, then commit.
+- Commit messages in English (see 0.1).
