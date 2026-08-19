@@ -82,7 +82,7 @@ This flow never commits directly to `develop`:
 1. The agent that implemented the change (`drupal-developer`/`frontend`) commits its changes on a working branch (created from `develop`, with a descriptive name like `fix/whatever` or `feat/whatever`), in English (rules 0.1/0.5 of AGENTS.md).
 2. The branch is pushed to `origin` (remote: `git@github.com:your-org/your-drupal-site.git`).
 3. A PR is opened against `develop` with `gh pr create` — title and description in English, including what changed and a summary of the tester's verification.
-4. The [PR reviewer](../agents/agent-pr-reviewer.md) runs `phpcs` (Drupal/DrupalPractice standards) on PHP and `stylelint` on CSS, plus a reasoned review, and comments on the PR.
+4. The [PR reviewer](../agents/agent-pr-reviewer.md) runs `phpcs` (Drupal/DrupalPractice standards) on PHP, `stylelint` on CSS and ESLint on JS — Coder/`phpcs` no longer covers CSS or JS (https://www.drupal.org/project/coder) — plus a reasoned review, and comments on the PR.
 5. If there are blocking findings: back to the agent that implemented it, a new commit on the same branch (the PR updates automatically), re-tested if the fix could affect behavior, and back to the reviewer.
 6. When the reviewer has no blocking findings: the orchestrator tells the user the PR is ready, with the link.
 7. **The user does the merge.** No agent ever executes `gh pr merge` or commits directly to `develop` — this is the one step in this flow strictly reserved for a manual human action outside the agents' control.

@@ -33,9 +33,14 @@ project" parts are still templates, not yet proven on a second project.
   each agent described in `harness/agents/`.
 - `.claude/skills/` — main-session skills (`/orchestrator`, `/content-flow`,
   `/dev-flow`) plus the Drupal/frontend domain skills preloaded into the
-  relevant subagents.
+  relevant subagents. `drupal-standards/` is authored here directly (not a
+  symlink): the sourced Drupal 11 rulebook — global rules G1–G21 plus the
+  content-architecture criteria C1–C5, each with its documented reason and a
+  drupal.org URL — shared by `drupal-developer`, `frontend`, `tester`,
+  `pr-reviewer` and `planner`.
 - `.agents/skills/` — actual content of the skills installed from the
-  external catalog (`.claude/skills/<name>` are symlinks into here).
+  external catalog (those `.claude/skills/<name>` entries are symlinks into
+  here).
 - `AGENTS.md` — base rules (language, honesty, prior approval). Section 0.4
   (test environment) ships as a placeholder — fill it in with your own
   project's real data, and never commit real credentials to a shared repo.

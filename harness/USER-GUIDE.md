@@ -49,8 +49,8 @@ Three more rules that shape the dev flow:
 **Infrastructure this depends on** (all real, none simulated):
 - A remote (e.g. `git@github.com:your-org/your-drupal-site.git`) configured as `origin`, with your working branches mirrored there.
 - The `gh` CLI installed and authenticated.
-- `phpcs` (with `Drupal`+`DrupalPractice` standards, via `drupal/coder`) installed as a Composer dev dependency, configured in your project's `phpcs.xml` (pointing at your custom modules/themes).
-- `stylelint` installed as an npm dev dependency of your theme, configured in the theme's `.stylelintrc.json` (`npm run lint:css`). If your project's design-system CSS is authored in SCSS and compiled, make sure the lint step targets the right layer — document your actual pipeline instead of assuming this guide's example matches it.
+- `phpcs` (with `Drupal`+`DrupalPractice` standards, via `drupal/coder`) installed as a Composer dev dependency, configured in your project's `phpcs.xml` (pointing at your custom modules/themes). Note that Coder covers **PHP only** — "JavaScript and CSS support have been removed from Coder" (https://www.drupal.org/project/coder), so CSS and JS need their own linters below.
+- `stylelint` installed as an npm dev dependency of your theme, configured in the theme's `.stylelintrc.json` (`npm run lint:css`), and ESLint for JS — both with the official Drupal configuration files. If your project's design-system CSS is authored in SCSS and compiled, make sure the lint step targets the right layer — document your actual pipeline instead of assuming this guide's example matches it.
 
 Full detail: `harness/flows/dev-testing-flow.md` and `harness/agents/agent-pr-reviewer.md`.
 

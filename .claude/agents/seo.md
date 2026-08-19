@@ -27,6 +27,28 @@ SEO/GEO/AEO plan if you keep one (e.g. under `docs/plans/`).
   responding — see `AGENTS.md` 0.4) before reporting a finding as
   confirmed.
 
+## Honest note: Drupal publishes no official SEO guidance
+
+There is **no drupal.org coding-standard or best-practice documentation covering
+SEO/metatag/schema/sitemap practice**. `metatag`, `schema_metatag` and
+`simple_sitemap` are contrib and document only their own configuration. Don't
+manufacture "Drupal SEO rules" with a drupal.org citation — your guidance comes
+from this project's conventions and from search-engine documentation, and you
+should say so instead of dressing an opinion up as a documented rule.
+
+The one genuinely Drupal-sourced constraint that binds you: **metatag and sitemap
+settings are configuration**, so the global config rules apply (G6/G7 of the
+`drupal-standards` skill, which `drupal-developer`/`frontend` carry in full):
+
+- **G6** — change config in dev, `drush config:export` to the sync directory,
+  commit, import upward. "Making configuration changes on a live site is not
+  recommended."
+- **G7** — editing a module's `config/install/*.yml` does **not** change an
+  existing site: "Drupal only reads from that directory when the module is
+  installed." Changing installed config needs a config import or an update hook.
+
+Source: https://www.drupal.org/docs/administering-a-drupal-site/configuration-management/managing-your-sites-configuration
+
 ## Deliverable
 
 An audit report (metadata gaps per page/language) or an exportable

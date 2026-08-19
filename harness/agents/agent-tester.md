@@ -31,6 +31,46 @@ Illustrative pattern (example — adapt to your project): when enabling `content
 - Drush (config/data verification via `drush php:script -`).
 - Playwright + Chromium (already installed) for end-to-end browser verification against `[your-dev-url]` (rule 0.4).
 - Access to environment logs (`ddev logs`) to rule out regressions.
+- Skill preloaded (`skills:` in `.claude/agents/tester.md`): `drupal-standards` — the shared, cross-agent rulebook (`.claude/skills/drupal-standards/SKILL.md`) with the global Drupal 11 rules G1–G21 (never hack core, Composer-managed contrib and patches, config-as-code, security, coding standards) and the content-architecture criteria C1–C5, each with its documented reason and a real drupal.org source URL. The tester-only rules live below, in "Drupal-specific practices".
+
+## Drupal-specific practices (testing)
+
+Global rules live in the `drupal-standards` skill. What follows is testing-only, and every rule carries its documented source.
+
+### T1. The four test types and what each bootstraps
+
+| Type | Base class | Official description |
+|---|---|---|
+| **Unit** | `Drupal\Tests\UnitTestCase` | "PHPUnit-based tests with minimal dependencies." No Drupal bootstrap — fastest. |
+| **Kernel** | `Drupal\KernelTests\KernelTestBase` | "PHPUnit-based tests with a bootstrapped kernel, and a minimal number of extensions enabled." |
+| **Functional** | `Drupal\Tests\BrowserTestBase` | "PHPUnit-based tests with a full booted Drupal instance." Simulated browser, **no JavaScript**. |
+| **FunctionalJavascript** | `Drupal\FunctionalJavascriptTests\WebDriverTestBase` | "PHPUnit-based tests that use Webdriver to perform tests of Javascript and Ajax functionality in the browser." |
+
+Selection guidance, verbatim: "Use Unit tests first for speed, escalate complexity as needed through Kernel and Functional tests, and reserve FunctionalJavascript for scenarios requiring actual browser interaction."
+Source: https://www.drupal.org/docs/automated-testing/types-of-tests
+
+### T2. Use the modern PHPUnit base classes
+> "It is recommended to write new tests using the PHPUnit base classes `UnitTestCase`, `KernelTestBase`, `BrowserTestBase` (web tests) or `WebDriverTestBase` (JavaScript-enabled web tests using WebDriver)."
+
+Source: https://www.drupal.org/docs/automated-testing/phpunit-in-drupal
+
+### T3. Test file placement and metadata
+Tests live under `MYMODULE/tests/src/<Unit|Kernel|Functional|FunctionalJavascript>/`, with matching namespaces, and require `@group` metadata.
+Source: https://www.drupal.org/docs/automated-testing/phpunit-in-drupal
+**Precision:** the overview page confirms the `tests/src/` layout and that `@group` is required metadata, but does not spell out the exact namespace pattern — the dedicated "PHPUnit file structure, namespace, and required metadata" subpage does. Fetch that subpage if you need the literal namespace rule.
+
+### T4. Update hooks must be tested
+Update functions get manual **and** automated testing before deployment — the Update API introduction "emphasizes that updates should be tested both manually and through automated tests before deployment". If a change from [Drupal developer](agent-drupal-developer.md) ships a `hook_update_N()` / `hook_post_update_NAME()`, running it is part of this agent's verification, not an optional extra.
+Source: https://www.drupal.org/docs/drupal-apis/update-api/introduction-to-update-api-for-drupal-8
+
+### T5. Which type for what — practical mapping
+**Synthesis, not a verbatim table from drupal.org** — the escalation principle (T1) is documented, this expansion is a reasonable reading of it:
+- Pure PHP logic, a service with mockable dependencies, a helper class → **Unit**
+- Entity/field/config behaviour, hook firing, plugin discovery, an update hook → **Kernel**
+- A page renders, a form submits, permissions gate correctly, a route returns the right status → **Functional**
+- AJAX, Layout Builder / Media Library modals, JS behaviours, anything requiring a real browser → **FunctionalJavascript**
+
+This mapping does not replace this agent's "verify in more than one way" rule above: automated tests are one method, not the whole certification.
 
 ## Approval gate
 Implements nothing — it's purely verification. Its approval (pass) is a necessary but not sufficient condition: the human still holds the final gate of rule 0.3 before merge/commit to `develop`.

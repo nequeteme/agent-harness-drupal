@@ -34,6 +34,8 @@ No task in the plan should require, to complete, more than ~60% of the context w
 ## Tools / access needed
 Read-only: `Read`, `Grep`, `Glob` over `harness/`, `docs/`, and the site's state via `Bash`/Drush if it needs to confirm something specific (e.g. "does field X already exist?"). It doesn't write content or code.
 
+Skill preloaded (`skills:` in `.claude/agents/planner.md`): `drupal-standards` — the shared, cross-agent rulebook (`.claude/skills/drupal-standards/SKILL.md`) with the global Drupal 11 rules G1–G21 and the content-architecture criteria C1–C5, each with its documented reason and a real drupal.org source URL. For planning, the two parts that matter most are **C1–C5** (whether a modelling task should become a Content Type, Paragraph type, Content Block or Media type — and the honest note that Drupal publishes no official decision matrix, so that call is synthesis, not policy) and **G6–G9** (any config change is a dev → export → commit → import task, never a "change it on production" task).
+
 ## Approval gate
 None of its own — planning is free (rule 0.3). The plan it produces can include gates for the execution tasks it plans.
 
