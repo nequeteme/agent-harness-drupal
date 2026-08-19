@@ -2,9 +2,10 @@
 
 A multi-agent architecture for Claude Code (orchestrator, planner,
 documenter, 14 specialized execution agents, content and development flows,
-short/long-term memory system) extracted from its first real use case: a
-Drupal 11 site build. This repo is a **starter kit**, not a record of that
-original project — all project-specific content (client name, domain,
+short/long-term memory system) extracted from its first real use case: the
+Drupal 11 site build for [Danemar Parceros](https://danemarparceros.pt/), a
+Drupal development agency. This repo is a **starter kit**, not a record of
+that original project — all project-specific content (client name, domain,
 repo, GitHub Projects board, memory entries) has been stripped or emptied
 to templates, and everything has been renamed/translated to English.
 
