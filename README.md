@@ -1,4 +1,4 @@
-# Agent harness (alpha)
+# Agent harness engineer (alpha)
 
 A multi-agent architecture for Claude Code (orchestrator, planner,
 documenter, 14 specialized execution agents, content and development flows,
