@@ -1,17 +1,19 @@
 # Agent harness engineer (alpha)
 
 A multi-agent architecture for Claude Code (orchestrator, planner,
-documenter, 14 specialized execution agents, content and development flows,
-short/long-term memory system) extracted from its first real use case: the
-Drupal 11 site build for [Danemar Parceros](https://danemarparceros.pt/), a
-Drupal development agency. This repo is a **starter kit**, not a record of
-that original project — all project-specific content (client name, domain,
-repo, GitHub Projects board, memory entries) has been stripped or emptied
-to templates, and everything has been renamed/translated to English.
+documenter, 12 specialized execution agents, content and development
+flows, short/long-term memory system) extracted from its first real use
+case: a trilingual (EN/ES/PT) Drupal 11 site build with editorial
+workflows. This repo is a **starter kit**, not a record of that original
+project — all project-specific content (client name, domain, repo, GitHub
+Projects board, memory entries) has been stripped or emptied to
+templates, and everything has been renamed/translated to English.
 
-It's an **alpha**: the mechanism (how agents, flows, memory, and skills fit
-together) is real and battle-tested on one project; the "fill in your own
-project" parts are still templates, not yet proven on a second project.
+It's an **alpha**: the mechanism (how agents, flows, memory, and skills
+fit together) is real and battle-tested on exactly one project — a
+multilingual corporate site, not a high-volume or enterprise platform.
+The "fill in your own project" parts are still templates, not yet proven
+on a second project.
 
 ## Structure
 
